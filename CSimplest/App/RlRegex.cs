@@ -1,16 +1,16 @@
 ﻿using CSimplest.CSRequest.Interfaces;
 using System.Text.RegularExpressions;
-using System;
 using CSimplest.Extensions;
+using System;
 
 namespace CSimplest.App
 {
-    public sealed class RxRule: AppRule
+    public sealed class RlRegex: AppRule
     {
         private readonly Resolvable _request;
         private readonly Regex _path;
 
-        public RxRule(Regex path, Resolvable request)
+        public RlRegex(Resolvable request, Regex path)
         {
             _request = request;
             _path = path;
@@ -22,6 +22,11 @@ namespace CSimplest.App
                 () => { _request.Process(); },
                 () => {  }
             );
+        }
+
+        public Resolvable Resolve()
+        {
+            return _request;
         }
     }
 }

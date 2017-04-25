@@ -26,7 +26,7 @@ namespace Sample
 
         protected void Application_BeginRequest(object sender, EventArgs e)
         {
-            var textResponse =
+            var textRq =
                 new RqWithResponse(
                     new RqIIS(Request),
                     new RsDocument(
@@ -37,27 +37,42 @@ namespace Sample
                             ),
                             new Dictionary<string, Stringable>()
                             {
-                                { "user", new User("Dmitriy", "Konovalov") }
+                                { "user", new User("User", "Sample") }
                             }
                         )
                     )
                 );
 
-            var htmlResponse =
+            var htmlRq=
                 new RqWithResponse(
                     new RqIIS(Request),
                         new RsHtml(
                             new RsIIS(Response),
-                            new User("Dmitriy", "Konovalov")
+                            new User("User", "Sample")
                         )
                 );
 
-            new Application(new List<RxRule>() {
-                new RxRule(
-                    new Regex("^~/$",RegexOptions.Compiled),textResponse
+            var jsonRq =
+                new RqWithResponse(
+                    new RqIIS(Request),
+                        new RsJson(
+                            new RsIIS(Response),
+                            new User("User", "Sample")
+                        )
+                );
+
+            new Application(new List<AppRule>() {
+                new RlRegex(
+                    textRq, new Regex("^~/$",RegexOptions.Compiled)
                 ),
-                new RxRule(
-                    new Regex("^~/html.*$",RegexOptions.Compiled),htmlResponse
+                new RlRegex(
+                    htmlRq, new Regex("^~/html.*$",RegexOptions.Compiled)
+                ),
+                new RlPost(
+                    new RlRegex(
+                        jsonRq, 
+                        new Regex("^~/json.*$",RegexOptions.Compiled)
+                    )
                 )
             }).Run();
         }

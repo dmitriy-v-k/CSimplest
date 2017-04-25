@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CSimplest.Common;
+using CSimplest.CSRequest.Interfaces;
 
 namespace CSimplest.App
 {
-    public interface AppRule
+    public interface AppRule: Resolvable<Resolvable>
     {
         void Use();
     }

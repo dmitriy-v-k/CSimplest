@@ -43,9 +43,11 @@
   <ItemGroup>
     <Compile Include="App\Application.cs" />
     <Compile Include="App\AppRule.cs" />
-    <Compile Include="App\RxRule.cs" />
-    <Compile Include="Common\CanDocument.cs" />
-    <Compile Include="Common\CanHtml.cs" />
+    <Compile Include="App\RlMethods.cs" />
+    <Compile Include="App\RlPost.cs" />
+    <Compile Include="App\RlRegex.cs" />
+    <Compile Include="Documents\Interfaces\CanDocument.cs" />
+    <Compile Include="Documents\Interfaces\CanHtml.cs" />
     <Compile Include="Common\FilePath.cs" />
     <Compile Include="Common\Resolvable.cs" />
     <Compile Include="Common\Stringable.cs" />
@@ -62,12 +64,14 @@
     <Compile Include="CSResponse\RsEmpty.cs" />
     <Compile Include="CSResponse\RsHtml.cs" />
     <Compile Include="CSResponse\RsIIS.cs" />
+    <Compile Include="CSResponse\RsJson.cs" />
     <Compile Include="CSResponse\RsText.cs" />
     <Compile Include="CSResponse\RsWithHeaders.cs" />
     <Compile Include="Documents\DcFile.cs" />
     <Compile Include="Documents\DcTemplate.cs" />
     <Compile Include="Documents\Document.cs" />
     <Compile Include="Documents\DcPlain.cs" />
+    <Compile Include="Documents\Interfaces\CanJson.cs" />
     <Compile Include="Extensions\BooleanExtension.cs" />
     <Compile Include="Extensions\NameValueCollectionExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
