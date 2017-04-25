@@ -26,44 +26,38 @@ namespace Sample
 
         protected void Application_BeginRequest(object sender, EventArgs e)
         {
-            var request1 =
+            var textResponse =
                 new RqWithResponse(
                     new RqIIS(Request),
-                    new RsWithHeaders(
-                        new RsText(
-                            new RsIIS(Response),
-                            new DcTemplate(
-                                new DcFile(
-                                    new FilePath("~/App_Data/test.txt").Resolve()
-                                ),
-                                new Dictionary<string, Stringable>()
-                                {
-                                    { "user", new User("Dmitriy", "Konovalov") }
-                                }
-                            )
-                        ),
-                        new List<KeyValuePair<string, string>>()
-                        {
-                            new KeyValuePair<string, string>("n1", "v1")
-                        }
+                    new RsDocument(
+                        new RsIIS(Response),
+                        new DcTemplate(
+                            new DcFile(
+                                new FilePath("~/App_Data/test.txt").Resolve()
+                            ),
+                            new Dictionary<string, Stringable>()
+                            {
+                                { "user", new User("Dmitriy", "Konovalov") }
+                            }
+                        )
                     )
                 );
 
-            var request2 =
+            var htmlResponse =
                 new RqWithResponse(
                     new RqIIS(Request),
-                    new RsText(
-                        new RsIIS(Response),
-                        new Text("Done2")
-                    )
+                        new RsHtml(
+                            new RsIIS(Response),
+                            new User("Dmitriy", "Konovalov")
+                        )
                 );
 
             new Application(new List<RxRule>() {
                 new RxRule(
-                    new Regex("^~/$",RegexOptions.Compiled),request1
+                    new Regex("^~/$",RegexOptions.Compiled),textResponse
                 ),
                 new RxRule(
-                    new Regex("^~/test.*$",RegexOptions.Compiled),request2
+                    new Regex("^~/html.*$",RegexOptions.Compiled),htmlResponse
                 )
             }).Run();
         }
