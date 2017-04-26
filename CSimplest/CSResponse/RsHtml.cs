@@ -4,13 +4,13 @@ using CSimplest.Documents.Interfaces;
 
 namespace CSimplest.CSResponse
 {
-    public sealed class RsHtml : Resolvable
+    public sealed class RsHtml : RsWrap
     {
-        private readonly Resolvable _origin;
-        private readonly CanHtml _htmlDoc;
+        private readonly RsWrap _origin;
+        private readonly DcHtml _htmlDoc;
         private readonly IEnumerable<KeyValuePair<string, string>> headers;
 
-        public RsHtml(Resolvable origin, CanHtml htmlDocument)
+        public RsHtml(RsWrap origin, DcHtml htmlDocument)
         {
             _origin = origin;
             _htmlDoc = htmlDocument;
@@ -32,9 +32,9 @@ namespace CSimplest.CSResponse
             ).Go();
         }
 
-        public Dest Resolve()
+        public RsDestination Unwrap()
         {
-            return _origin.Resolve();
+            return _origin.Unwrap();
         }
     }
 }

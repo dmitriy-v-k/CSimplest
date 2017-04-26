@@ -1,23 +1,21 @@
 ﻿using CSimplest.CSRequest.Interfaces;
 using CSimplest.CSResponse.Interfaces;
 
-using RqResolvable = CSimplest.CSRequest.Interfaces.Resolvable;
-
 namespace CSimplest.CSRequest
 {
-    public class RqWithResponse : RqResolvable
+    public class RqWithResponse : RqWrap
     {
-        private RqResolvable _origin;
+        private RqWrap _origin;
         private Response _response;
-        public RqWithResponse(RqResolvable origin, Response response)
+        public RqWithResponse(RqWrap origin, Response response)
         {
             _origin = origin;
             _response = response;
         }
 
-        public Src Resolve()
+        public RqSource Unwrap()
         {
-            return _origin.Resolve();
+            return _origin.Unwrap();
         }
 
         public void Process()

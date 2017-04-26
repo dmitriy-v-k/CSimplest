@@ -20,6 +20,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -46,19 +48,18 @@
     <Compile Include="App\RlMethods.cs" />
     <Compile Include="App\RlPost.cs" />
     <Compile Include="App\RlRegex.cs" />
-    <Compile Include="Documents\Interfaces\CanDocument.cs" />
-    <Compile Include="Documents\Interfaces\CanHtml.cs" />
+    <Compile Include="Documents\Interfaces\DcHtml.cs" />
     <Compile Include="Common\FilePath.cs" />
-    <Compile Include="Common\Resolvable.cs" />
-    <Compile Include="Common\Stringable.cs" />
+    <Compile Include="Common\Wrap.cs" />
     <Compile Include="Common\Text.cs" />
+    <Compile Include="Common\PlainText.cs" />
     <Compile Include="CSRequest\Interfaces\Request.cs" />
-    <Compile Include="CSRequest\Interfaces\Resolvable.cs" />
-    <Compile Include="CSRequest\Interfaces\Src.cs" />
+    <Compile Include="CSRequest\Interfaces\RqWrap.cs" />
+    <Compile Include="CSRequest\Interfaces\RqSource.cs" />
     <Compile Include="CSRequest\RqIIS.cs" />
     <Compile Include="CSRequest\RqWithResponse.cs" />
-    <Compile Include="CSResponse\Interfaces\Dest.cs" />
-    <Compile Include="CSResponse\Interfaces\Resolvable.cs" />
+    <Compile Include="CSResponse\Interfaces\RsDestination.cs" />
+    <Compile Include="CSResponse\Interfaces\RsWrap.cs" />
     <Compile Include="CSResponse\Interfaces\Response.cs" />
     <Compile Include="CSResponse\RsDocument.cs" />
     <Compile Include="CSResponse\RsEmpty.cs" />
@@ -69,9 +70,9 @@
     <Compile Include="CSResponse\RsWithHeaders.cs" />
     <Compile Include="Documents\DcFile.cs" />
     <Compile Include="Documents\DcTemplate.cs" />
-    <Compile Include="Documents\Document.cs" />
+    <Compile Include="Documents\Interfaces\DcText.cs" />
     <Compile Include="Documents\DcPlain.cs" />
-    <Compile Include="Documents\Interfaces\CanJson.cs" />
+    <Compile Include="Documents\Interfaces\DcJson.cs" />
     <Compile Include="Extensions\BooleanExtension.cs" />
     <Compile Include="Extensions\NameValueCollectionExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

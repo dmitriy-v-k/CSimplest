@@ -2,8 +2,8 @@
 
 namespace CSimplest.Documents.Interfaces
 {
-    public interface CanJson: Stringable
+    public interface DcText: Text
     {
-        Document AsJson();
+        Text AsText();
     }
 }

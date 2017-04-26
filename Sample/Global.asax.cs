@@ -33,9 +33,9 @@ namespace Sample
                         new RsIIS(Response),
                         new DcTemplate(
                             new DcFile(
-                                new FilePath("~/App_Data/test.txt").Resolve()
+                                new FilePath("~/App_Data/test.txt").Unwrap()
                             ),
-                            new Dictionary<string, Stringable>()
+                            new Dictionary<string, Text>()
                             {
                                 { "user", new User("User", "Sample") }
                             }

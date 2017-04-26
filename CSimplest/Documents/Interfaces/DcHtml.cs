@@ -2,8 +2,8 @@
 
 namespace CSimplest.Documents.Interfaces
 {
-    public interface CanHtml: Stringable
+    public interface DcHtml: DcText
     {
-        Document AsHtml();
+        Text AsHtml();
     }
 }

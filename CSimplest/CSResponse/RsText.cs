@@ -3,24 +3,24 @@ using CSimplest.CSResponse.Interfaces;
 
 namespace CSimplest.CSResponse
 {
-    public sealed class RsText : Resolvable
+    public sealed class RsText : RsWrap
     {
-        private readonly Resolvable _origin;
-        private readonly Stringable _text;
-        public RsText(Resolvable origin, Stringable text)
+        private readonly RsWrap _origin;
+        private readonly Text _text;
+        public RsText(RsWrap origin, Text text)
         {
             _origin = origin;
             _text = text;
         }
 
-        public Dest Resolve()
+        public RsDestination Unwrap()
         {
-            return _origin.Resolve();
+            return _origin.Unwrap();
         }
 
         public void Go()
         {
-            Resolve().Text(_text.AsString()).Go();
+            Unwrap().Text(_text.Unwrap()).Go();
         }
     }
 }

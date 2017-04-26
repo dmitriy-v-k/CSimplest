@@ -1,5 +1,4 @@
-﻿using System;
-using CSimplest.CSRequest.Interfaces;
+﻿using CSimplest.CSRequest.Interfaces;
 using CSimplest.Extensions;
 
 namespace CSimplest.App
@@ -13,14 +12,14 @@ namespace CSimplest.App
             _origin = origin;
         }
 
-        public Resolvable Resolve()
+        public RqWrap Unwrap()
         {
-            return _origin.Resolve();
+            return _origin.Unwrap();
         }
 
         public void Use()
         {
-            "POST".Equals(_origin.Resolve().Resolve().Method().ToUpper()).If(
+            "POST".Equals(_origin.Unwrap().Unwrap().Method().ToUpper()).If(
                 () => { _origin.Use(); },
                 () => { }
             );

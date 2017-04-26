@@ -4,13 +4,13 @@ using System.Collections.Generic;
 
 namespace CSimplest.CSResponse
 {
-    public sealed class RsJson : Resolvable
+    public sealed class RsJson : RsWrap
     {
-        private readonly Resolvable _origin;
-        private readonly CanJson _jsonDoc;
+        private readonly RsWrap _origin;
+        private readonly DcJson _jsonDoc;
         private readonly IEnumerable<KeyValuePair<string, string>> headers;
 
-        public RsJson(Resolvable origin, CanJson jsonDocument)
+        public RsJson(RsWrap origin, DcJson jsonDocument)
         {
             _origin = origin;
             _jsonDoc = jsonDocument;
@@ -31,9 +31,9 @@ namespace CSimplest.CSResponse
             ).Go();
         }
 
-        public Dest Resolve()
+        public RsDestination Unwrap()
         {
-            return _origin.Resolve();
+            return _origin.Unwrap();
         }
     }
 }

@@ -5,7 +5,7 @@ using System.Web;
 
 namespace CSimplest.CSRequest
 {
-    public sealed class RqIIS : Src
+    public sealed class RqIIS : RqSource
     {
         private readonly HttpRequest src;
         public RqIIS(HttpRequest IISRequest)
@@ -32,7 +32,7 @@ namespace CSimplest.CSRequest
         {
         }
 
-        public Src Resolve()
+        public RqSource Unwrap()
         {
             return this;
         }

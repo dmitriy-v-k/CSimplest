@@ -1,13 +1,13 @@
 ﻿using CSimplest.Common;
 using CSimplest.Documents;
 using System.Collections.Generic;
-using System;
 using CSimplest.Documents.Interfaces;
 using System.Text;
+using System;
 
 namespace Sample.Entities
 {
-    public sealed class User: CanDocument, CanHtml, CanJson
+    public sealed class User: DcHtml, DcJson
     {
         private readonly string _name;
         private readonly string _secondName;
@@ -17,38 +17,34 @@ namespace Sample.Entities
             _secondName = secondName;
         }
 
-        public Document AsDocument()
-        {
-            return new DcPlain(
-                new Text(
-                    AsString()
-                )
-            );
-        }
-
-        public Document AsHtml()
+        public Text AsHtml()
         {
             return new DcTemplate(
                 new DcFile(
-                    new FilePath("~/App_Data/Templates/Html/User.html").Resolve()
+                    new FilePath("~/App_Data/Templates/Html/User.html").Unwrap()
                 ),
-                new Dictionary<string, Stringable>() {
-                    { "name", new Text(_name) },
-                    { "secondName", new Text(_secondName) }
+                new Dictionary<string, Text>() {
+                    { "name", new PlainText(_name) },
+                    { "secondName", new PlainText(_secondName) }
                 }
-            );
+            ).AsText();
         }
 
-        public Document AsJson()
+        public Text AsJson()
         {
             return new DcPlain(
-                new Text(
+                new PlainText(
                     ToJson()
                 )
-            );
+            ).AsText();
         }
 
-        public string AsString()
+        public Text AsText()
+        {
+            return new PlainText(Unwrap());
+        }
+
+        public string Unwrap()
         {
             return string.Format("{0} {1}", _name, _secondName);
         }

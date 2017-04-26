@@ -2,7 +2,7 @@
 
 namespace CSimplest.CSRequest.Interfaces
 {
-    public interface Src : Resolvable
+    public interface RqSource : RqWrap
     {
         string Text();
         NameValueCollection Headers();

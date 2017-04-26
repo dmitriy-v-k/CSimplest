@@ -7,10 +7,10 @@ namespace CSimplest.App
 {
     public sealed class RlRegex: AppRule
     {
-        private readonly Resolvable _request;
+        private readonly RqWrap _request;
         private readonly Regex _path;
 
-        public RlRegex(Resolvable request, Regex path)
+        public RlRegex(RqWrap request, Regex path)
         {
             _request = request;
             _path = path;
@@ -18,13 +18,13 @@ namespace CSimplest.App
 
         public void Use()
         {
-            _path.IsMatch(_request.Resolve().Path()).If(
+            _path.IsMatch(_request.Unwrap().Path()).If(
                 () => { _request.Process(); },
                 () => {  }
             );
         }
 
-        public Resolvable Resolve()
+        public RqWrap Unwrap()
         {
             return _request;
         }

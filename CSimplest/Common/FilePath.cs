@@ -1,9 +1,8 @@
-﻿using System;
-using System.Web;
+﻿using System.Web;
 
 namespace CSimplest.Common
 {
-    public class FilePath: Resolvable<string>
+    public sealed class FilePath: Wrap<string>
     {
         private readonly string path;
         public FilePath(string relativePath)
@@ -11,7 +10,7 @@ namespace CSimplest.Common
             path = relativePath;
         }
 
-        public string Resolve()
+        public string Unwrap()
         {
             return HttpContext.Current.Server.MapPath(path);
         }

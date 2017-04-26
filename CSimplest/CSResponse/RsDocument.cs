@@ -1,27 +1,26 @@
-﻿using CSimplest.Common;
-using CSimplest.CSResponse.Interfaces;
-using CSimplest.Documents;
+﻿using CSimplest.CSResponse.Interfaces;
+using CSimplest.Documents.Interfaces;
 
 namespace CSimplest.CSResponse
 {
-    public sealed class RsDocument : Resolvable
+    public sealed class RsDocument : RsWrap
     {
-        private readonly Resolvable _origin;
-        private readonly Document _doc;
-        public RsDocument(Resolvable origin, Document document)
+        private readonly RsWrap _origin;
+        private readonly DcText _doc;
+        public RsDocument(RsWrap origin, DcText document)
         {
             _origin = origin;
             _doc = document;
         }
 
-        public Dest Resolve()
+        public RsDestination Unwrap()
         {
-            return _origin.Resolve();
+            return _origin.Unwrap();
         }
 
         public void Go()
         {
-            Resolve().Text(_doc.AsString()).Go();
+            Unwrap().Text(_doc.Unwrap()).Go();
         }
     }
 }

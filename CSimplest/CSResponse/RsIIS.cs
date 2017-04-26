@@ -5,7 +5,7 @@ using System.Web;
 namespace CSimplest.CSResponse
 {
     //Our response To IIS response
-    public sealed class RsIIS : Dest
+    public sealed class RsIIS : RsDestination
     {
         private readonly HttpResponse dest;
         public RsIIS(HttpResponse IISResponse)
@@ -13,19 +13,19 @@ namespace CSimplest.CSResponse
             dest = IISResponse;
         }
 
-        public Dest Text(string text)
+        public RsDestination Text(string text)
         {
             dest.Write(text);
             return this;
         }
 
-        public Dest Header(KeyValuePair<string, string> value)
+        public RsDestination Header(KeyValuePair<string, string> value)
         {
             dest.AddHeader(value.Key, value.Value);
             return this;
         }
 
-        public Dest Resolve()
+        public RsDestination Unwrap()
         {
             return this;
         }

@@ -15,14 +15,14 @@ namespace CSimplest.App
             _methods = methods.ToList().ConvertAll(m => m.ToUpper());
         }
 
-        public Resolvable Resolve()
+        public RqWrap Unwrap()
         {
-            return _origin.Resolve();
+            return _origin.Unwrap();
         }
 
         public void Use()
         {
-            _methods.ToList().Contains(Resolve().Resolve().Method()).If(
+            _methods.ToList().Contains(Unwrap().Unwrap().Method()).If(
                 () => { _origin.Use(); },
                 () => { }    
             );

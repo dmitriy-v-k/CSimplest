@@ -3,7 +3,7 @@ using CSimplest.CSRequest.Interfaces;
 
 namespace CSimplest.App
 {
-    public interface AppRule: Resolvable<Resolvable>
+    public interface AppRule: Wrap<RqWrap>
     {
         void Use();
     }

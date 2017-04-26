@@ -1,6 +1,7 @@
 ﻿namespace CSimplest.Common
 {
-    public interface Text : Wrap<string>
+    public interface Wrap<T>
     {
+        T Unwrap();
     }
 }
