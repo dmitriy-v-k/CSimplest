@@ -48,7 +48,11 @@
     <Compile Include="App\RlMethods.cs" />
     <Compile Include="App\RlPost.cs" />
     <Compile Include="App\RlRegex.cs" />
+    <Compile Include="CSRequest\Interfaces\RqWithParams.cs" />
     <Compile Include="CSRequest\RqFile.cs" />
+    <Compile Include="CSRequest\RqWithParamsInPath.cs" />
+    <Compile Include="CSResponse\Interfaces\RsWithParameters.cs" />
+    <Compile Include="CSResponse\RsWithParams.cs" />
     <Compile Include="Documents\Interfaces\DcHtml.cs" />
     <Compile Include="Common\FilePath.cs" />
     <Compile Include="Common\Wrap.cs" />

@@ -73,12 +73,28 @@ namespace Sample
                 new FilePath("~/App_Data").Unwrap()
             );
 
+            var paremetersObj = new RqWithParamsInPath(
+                new RqIIS(Request),
+                new Regex("~/test")
+            );
+
+            var paramsRq = new RqWithResponse(
+                    new RqIIS(Request),
+                    new RsWithParams( //need response with logic e.g. RsTask = action(params) => { new User("User", paramsRq.ToString()) }
+                        new RsJson(
+                            new RsIIS(Response),
+                            new User("User", paramsRq.ToString())
+                        ),
+                        
+                    )
+            );
+
             new Application(new List<AppRule>() {
                 new RlRegex(
                     textRq, new Regex("^~/$",RegexOptions.Compiled)
                 ),
                 new RlRegex(
-                    fileRq, new Regex("^~/text/.*$",RegexOptions.Compiled)
+                    fileRq, new Regex("^~/text/.*$",RegexOptions.Compiled | RegexOptions.IgnoreCase)
                 ),
                 new RlRegex(
                     htmlRq, new Regex("^~/html.*$",RegexOptions.Compiled)
