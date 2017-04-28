@@ -43,27 +43,42 @@ namespace Sample
                     )
                 );
 
-            var htmlRq=
+            var htmlRq =
                 new RqWithResponse(
                     new RqIIS(Request),
-                        new RsHtml(
-                            new RsIIS(Response),
-                            new User("User", "Sample")
-                        )
+                    new RsHtml(
+                        new RsIIS(Response),
+                        new User("User", "Sample")
+                    )
                 );
 
             var jsonRq =
                 new RqWithResponse(
                     new RqIIS(Request),
-                        new RsJson(
-                            new RsIIS(Response),
-                            new User("User", "Sample")
-                        )
+                    new RsJson(
+                        new RsIIS(Response),
+                        new User("User", "Sample")
+                    )
                 );
+
+            var fileRq = new RqFile(
+                new RqIIS(Request),
+                new RsWithHeaders(
+                    new RsIIS(Response),
+                    new List<KeyValuePair<string, string>>()
+                    {
+                        new KeyValuePair<string, string>("test","test")        
+                    }
+                ),
+                new FilePath("~/App_Data").Unwrap()
+            );
 
             new Application(new List<AppRule>() {
                 new RlRegex(
                     textRq, new Regex("^~/$",RegexOptions.Compiled)
+                ),
+                new RlRegex(
+                    fileRq, new Regex("^~/text/.*$",RegexOptions.Compiled)
                 ),
                 new RlRegex(
                     htmlRq, new Regex("^~/html.*$",RegexOptions.Compiled)

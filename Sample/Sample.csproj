@@ -75,6 +75,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App_Data\text\Text" />
     <Content Include="App_Data\Templates\Html\User.html" />
     <Content Include="App_Data\test.txt" />
     <Content Include="Global.asax" />

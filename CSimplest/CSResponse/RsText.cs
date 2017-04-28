@@ -20,7 +20,8 @@ namespace CSimplest.CSResponse
 
         public void Go()
         {
-            Unwrap().Text(_text.Unwrap()).Go();
+            Unwrap().Text(_text.Unwrap());
+            _origin.Go();
         }
     }
 }
