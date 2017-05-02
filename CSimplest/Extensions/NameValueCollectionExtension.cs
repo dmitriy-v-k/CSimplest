@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CSimplest.Extensions
 {
     public static class NameValueCollectionExtension
     {
-        public static IEnumerable<KeyValuePair<string,string>> ToPairs(this NameValueCollection collection)
+        public static IEnumerable<KeyValuePair<string,string>> AsPairs(this NameValueCollection collection)
         {
             return 
                 from key in collection.AllKeys

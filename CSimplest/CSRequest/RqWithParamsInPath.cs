@@ -1,6 +1,7 @@
 ﻿using CSimplest.CSRequest.Interfaces;
 using System.Text.RegularExpressions;
 using System.Collections.Specialized;
+using CSimplest.Extensions;
 
 namespace CSimplest.CSRequest
 {
@@ -17,8 +18,7 @@ namespace CSimplest.CSRequest
 
         public NameValueCollection Parameters()
         {
-            var res = _rule.Match(Unwrap().Path()).Groups
-            return 
+            return _rule.Match(Unwrap().Path()).Groups.AsNameValueCollection(_rule.GetGroupNames());
         }
 
         public void Process()

@@ -51,8 +51,7 @@
     <Compile Include="CSRequest\Interfaces\RqWithParams.cs" />
     <Compile Include="CSRequest\RqFile.cs" />
     <Compile Include="CSRequest\RqWithParamsInPath.cs" />
-    <Compile Include="CSResponse\Interfaces\RsWithParameters.cs" />
-    <Compile Include="CSResponse\RsWithParams.cs" />
+    <Compile Include="CSResponse\RsSmart.cs" />
     <Compile Include="Documents\Interfaces\DcHtml.cs" />
     <Compile Include="Common\FilePath.cs" />
     <Compile Include="Common\Wrap.cs" />
@@ -79,9 +78,11 @@
     <Compile Include="Documents\DcPlain.cs" />
     <Compile Include="Documents\Interfaces\DcJson.cs" />
     <Compile Include="Extensions\BooleanExtension.cs" />
+    <Compile Include="Extensions\GroupCollectionExtension.cs" />
     <Compile Include="Extensions\NameValueCollectionExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

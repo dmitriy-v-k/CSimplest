@@ -18,7 +18,7 @@ namespace CSimplest.CSResponse
         public void Go()
         {
             var dest = Unwrap();
-            _headers.ToPairs().ToList().ForEach(p => dest.Header(p));
+            _headers.AsPairs().ToList().ForEach(p => dest.Header(p));
             _origin.Go();
         }
 
