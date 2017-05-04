@@ -77,17 +77,20 @@ namespace Sample
 
             var paramsRq = new RqWithResponse(
                 new RqIIS(Request),
-                new RsSmart(
-                    new RsIIS(Response),
-                    (original) => {
-                        var rqParams = new RqWithParamsInPath(
+                new RsWithHeaders(
+                    new RsParametric((parameters) => 
+                        new RsJson(
+                            new RsIIS(Response),
+                            new Users().FindById(parameters["name"])
+                        ),
+                        new RqWithParamsInPath(
                             new RqIIS(Request),
                             new Regex(@"~/params/(?<name>\w+)/(?<secondName>\w+)")
-                        ).Parameters();
-                        return new RsJson(
-                            original,
-                            new User(rqParams["name"], rqParams["secondName"])
-                        );
+                        ).Parameters()
+                    ),
+                    new List<KeyValuePair<string, string>>()
+                    {
+                        new KeyValuePair<string, string>("test","test")
                     }
                 )
             );

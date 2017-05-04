@@ -2,6 +2,7 @@
 using System.Text.RegularExpressions;
 using System.Collections.Specialized;
 using CSimplest.Extensions;
+using System;
 
 namespace CSimplest.CSRequest
 {
