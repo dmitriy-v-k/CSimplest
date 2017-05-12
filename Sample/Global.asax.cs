@@ -29,7 +29,6 @@ namespace Sample
 
         protected void Application_BeginRequest(object sender, EventArgs e)
         {
-
             var textRq =
                 new RqWithResponse(
                     new RqIIS(Request),
