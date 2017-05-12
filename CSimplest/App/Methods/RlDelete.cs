@@ -1,13 +1,13 @@
 ﻿using CSimplest.CSRequest.Interfaces;
 using CSimplest.Extensions;
 
-namespace CSimplest.App
+namespace CSimplest.App.Methods
 {
-    public sealed class RlPost : AppRule
+    public sealed class RlDelete : AppRule
     {
         private readonly AppRule _origin;
 
-        public RlPost(AppRule origin)
+        public RlDelete(AppRule origin)
         {
             _origin = origin;
         }
@@ -19,7 +19,7 @@ namespace CSimplest.App
 
         public void Use()
         {
-            "POST".Equals(_origin.Unwrap().Unwrap().Method().ToUpper()).If(
+            "DELETE".Equals(_origin.Unwrap().Unwrap().Method().ToUpper()).If(
                 () => { _origin.Use(); },
                 () => { }
             );

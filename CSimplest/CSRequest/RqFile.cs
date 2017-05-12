@@ -3,8 +3,6 @@ using CSimplest.CSResponse.Interfaces;
 using CSimplest.CSResponse;
 using CSimplest.Documents;
 using System.IO;
-using CSimplest.Common;
-using System;
 
 namespace CSimplest.CSRequest
 {
@@ -25,7 +23,7 @@ namespace CSimplest.CSRequest
         {
             new RsDocument(
                 _dest, 
-                new DcFile(
+                new DcTextFile(
                     preparePath(Unwrap().Path())
                 )
             ).Go();

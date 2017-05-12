@@ -19,7 +19,7 @@ namespace Sample.Entities
         public Text AsHtml()
         {
             return new DcTemplate(
-                new DcFile(
+                new DcTextFile(
                     new FilePath("~/App_Data/Templates/Html/User.html").Unwrap()
                 ),
                 new Dictionary<string, Text>() {

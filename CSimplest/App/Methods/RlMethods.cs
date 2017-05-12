@@ -3,7 +3,7 @@ using System.Linq;
 using CSimplest.CSRequest.Interfaces;
 using CSimplest.Extensions;
 
-namespace CSimplest.App
+namespace CSimplest.App.Methods
 {
     public sealed class RlMethods : AppRule
     {

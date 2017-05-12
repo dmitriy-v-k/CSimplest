@@ -1,16 +1,15 @@
 ﻿using CSimplest.Documents.Interfaces;
 using System.IO;
 using CSimplest.Common;
-using System;
 
 namespace CSimplest.Documents
 {
-    public sealed class DcFile : DcText
+    public sealed class DcTextFile : DcText, DcFile
     {
-        private readonly string path;
-        public DcFile(string fullPath)
+        private readonly string _path;
+        public DcTextFile(string path)
         {
-            path = fullPath;
+            _path = path;
         }
 
         public Text AsText()
@@ -18,9 +17,14 @@ namespace CSimplest.Documents
             return new PlainText(Unwrap());
         }
 
+        public string Path()
+        {
+            return _path;
+        }
+
         public string Unwrap()
         {
-            using (StreamReader sr = new StreamReader(path))
+            using (StreamReader sr = new StreamReader(Path()))
             {
                 return sr.ReadToEnd();
             }

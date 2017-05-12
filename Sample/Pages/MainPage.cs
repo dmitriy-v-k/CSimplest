@@ -11,7 +11,7 @@ namespace Sample.Pages
         public Text AsHtml()
         {
             return new DcTemplate(
-                new DcFile(
+                new DcTextFile(
                     new FilePath("~/App_Data/Templates/Html/MainPage.html").Unwrap()
                 ),
                 new Dictionary<string, Text>()

@@ -1,14 +1,17 @@
 ﻿using CSimplest.App;
+using CSimplest.App.Methods;
 using CSimplest.Common;
 using CSimplest.CSRequest;
 using CSimplest.CSResponse;
 using CSimplest.CSSession;
+using CSimplest.CSSession.Mock;
 using CSimplest.Documents;
 using Sample.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Web;
+using System.Web.SessionState;
 
 namespace Sample
 {
@@ -29,13 +32,15 @@ namespace Sample
 
         protected void Application_BeginRequest(object sender, EventArgs e)
         {
+            var sessionMock = new SMock();
+
             var textRq =
                 new RqWithResponse(
                     new RqIIS(Request),
                     new RsDocument(
                         new RsIIS(Response),
                         new DcTemplate(
-                            new DcFile(
+                            new DcTextFile(
                                 new FilePath("~/App_Data/test.txt").Unwrap()
                             ),
                             new Dictionary<string, Text>()
@@ -101,13 +106,16 @@ namespace Sample
             var sess = new RqWithResponse(
                 new RqIIS(Request),
                 new RsParametric((parameters) => {
-                    new RqWithSession(
+                    var sessLoc = new RqWithSession(
                         new RqIIS(Request),
-                        new SIIS(Session)
+                        sessionMock
                     ).Session("id", parameters["id"]);
-                    return new RsJson(
-                        new RsIIS(Response),
-                        new Users().FindById(parameters["id"])
+                    return new RsWithSession(
+                        new RsJson(
+                            new RsIIS(Response),
+                            new Users().FindById(sessLoc.Session("id"))
+                        ),
+                        sessionMock
                     );
                 },
                     new RqWithParamsInPath(
@@ -115,20 +123,6 @@ namespace Sample
                         new Regex(@"~/sess/(?<id>\w+)")
                     ).Parameters()
                 )
-            );
-
-            var sessCheck = new RqWithResponse(
-                new RqIIS(Request),
-                new RsLazy(() => {
-                    var session = new RqWithSession(
-                        new RqIIS(Request),
-                        new SIIS(Session)
-                    );
-                    return new RsJson(
-                        new RsIIS(Response),
-                        new Users().FindById(session.Session("id"))
-                    );
-                })
             );
 
             new Application(new List<AppRule>() {
@@ -146,9 +140,6 @@ namespace Sample
                 ),
                 new RlRegex(
                     sess, new Regex("^~/sess.*$",RegexOptions.Compiled)
-                ),
-                new RlRegex(
-                    sessCheck, new Regex("^~/sess/check.*$",RegexOptions.Compiled)
                 ),
                 new RlPost(
                     new RlRegex(

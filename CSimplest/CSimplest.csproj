@@ -33,6 +33,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
@@ -45,9 +46,14 @@
   <ItemGroup>
     <Compile Include="App\Application.cs" />
     <Compile Include="App\AppRule.cs" />
-    <Compile Include="App\RlMethods.cs" />
-    <Compile Include="App\RlPost.cs" />
+    <Compile Include="App\Methods\RlMethods.cs" />
+    <Compile Include="App\Methods\RlDelete.cs" />
+    <Compile Include="App\Methods\RlGet.cs" />
+    <Compile Include="App\Methods\RlPut.cs" />
+    <Compile Include="App\Methods\RlPost.cs" />
     <Compile Include="App\RlRegex.cs" />
+    <Compile Include="Common\Bin.cs" />
+    <Compile Include="Common\PlainBin.cs" />
     <Compile Include="CSRequest\Interfaces\RqWithParams.cs" />
     <Compile Include="CSRequest\Interfaces\RqWithSess.cs" />
     <Compile Include="CSRequest\RqFile.cs" />
@@ -55,11 +61,16 @@
     <Compile Include="CSRequest\RqWithSession.cs" />
     <Compile Include="CSResponse\RsLazy.cs" />
     <Compile Include="CSResponse\RsParametric.cs" />
+    <Compile Include="CSResponse\RsWithSession.cs" />
     <Compile Include="CSSession\Interfaces\Session.cs" />
+    <Compile Include="CSSession\Mock\SMock.cs" />
+    <Compile Include="Documents\DcBinFile.cs" />
     <Compile Include="Documents\DcWithHtml.cs" />
     <Compile Include="CSSession\Interfaces\SSource.cs" />
     <Compile Include="CSSession\Interfaces\SWrap.cs" />
     <Compile Include="CSSession\SIIS.cs" />
+    <Compile Include="Documents\Interfaces\DcBin.cs" />
+    <Compile Include="Documents\Interfaces\DcFile.cs" />
     <Compile Include="Documents\Interfaces\DcHtml.cs" />
     <Compile Include="Common\FilePath.cs" />
     <Compile Include="Common\Wrap.cs" />
@@ -80,7 +91,7 @@
     <Compile Include="CSResponse\RsJson.cs" />
     <Compile Include="CSResponse\RsText.cs" />
     <Compile Include="CSResponse\RsWithHeaders.cs" />
-    <Compile Include="Documents\DcFile.cs" />
+    <Compile Include="Documents\DcTextFile.cs" />
     <Compile Include="Documents\DcTemplate.cs" />
     <Compile Include="Documents\Interfaces\DcText.cs" />
     <Compile Include="Documents\DcPlain.cs" />

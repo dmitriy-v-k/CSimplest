@@ -29,20 +29,20 @@ namespace SimpleSite
 
         protected void Application_BeginRequest(object sender, EventArgs e)
         {
-            var mainContent = new DcWithHtml(
-                new DcFile(
-                    new FilePath("~/App_Data/Content/Html/MainContent.html").Unwrap()
+
+            var mainPage = new RqWithResponse(
+                new RqIIS(Request),
+                new RsHtml(
+                    new RsIIS(Response),
+                    new MainPage(
+                        new DcWithHtml(
+                            new DcTextFile(
+                                new FilePath("~/App_Data/Content/Html/MainContent.html").Unwrap()
+                            )
+                        )
+                    )
                 )
             );
-
-            var mainPage =
-                new RqWithResponse(
-                    new RqIIS(Request),
-                    new RsHtml(
-                        new RsIIS(Response),
-                        new MainPage(mainContent)
-                    )
-                );
 
             new Application(new List<AppRule>() {
                 new RlRegex(

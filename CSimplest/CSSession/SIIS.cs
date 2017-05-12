@@ -1,5 +1,8 @@
 ﻿using CSimplest.CSSession.Interfaces;
 using System.Web.SessionState;
+using System;
+using System.Web.Configuration;
+using System.Configuration;
 
 namespace CSimplest.CSSession
 {
@@ -9,6 +12,18 @@ namespace CSimplest.CSSession
         public SIIS(HttpSessionState session)
         {
             _session = session;
+        }
+
+        public string CookieName()
+        {
+            SessionStateSection sessionStateSection =
+              (SessionStateSection)ConfigurationManager.GetSection("system.web/sessionState");
+            return sessionStateSection.CookieName;
+        }
+
+        public string Id()
+        {
+            return _session.SessionID;
         }
 
         public string Item(string key)
