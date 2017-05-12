@@ -49,9 +49,16 @@
     <Compile Include="App\RlPost.cs" />
     <Compile Include="App\RlRegex.cs" />
     <Compile Include="CSRequest\Interfaces\RqWithParams.cs" />
+    <Compile Include="CSRequest\Interfaces\RqWithSess.cs" />
     <Compile Include="CSRequest\RqFile.cs" />
     <Compile Include="CSRequest\RqWithParamsInPath.cs" />
+    <Compile Include="CSRequest\RqWithSession.cs" />
+    <Compile Include="CSResponse\RsLazy.cs" />
     <Compile Include="CSResponse\RsParametric.cs" />
+    <Compile Include="CSSession\Interfaces\Session.cs" />
+    <Compile Include="CSSession\Interfaces\SSource.cs" />
+    <Compile Include="CSSession\Interfaces\SWrap.cs" />
+    <Compile Include="CSSession\SIIS.cs" />
     <Compile Include="Documents\Interfaces\DcHtml.cs" />
     <Compile Include="Common\FilePath.cs" />
     <Compile Include="Common\Wrap.cs" />

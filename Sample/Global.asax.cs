@@ -2,6 +2,7 @@
 using CSimplest.Common;
 using CSimplest.CSRequest;
 using CSimplest.CSResponse;
+using CSimplest.CSSession;
 using CSimplest.Documents;
 using Sample.Entities;
 using System;
@@ -16,16 +17,19 @@ namespace Sample
 
         protected void Application_Start(object sender, EventArgs e)
         {
-
         }
 
         protected void Session_Start(object sender, EventArgs e)
         {
+        }
 
+        protected void Application_AcquireRequestState(object sender, EventArgs e)
+        {
         }
 
         protected void Application_BeginRequest(object sender, EventArgs e)
         {
+
             var textRq =
                 new RqWithResponse(
                     new RqIIS(Request),
@@ -67,7 +71,7 @@ namespace Sample
                     new RsIIS(Response),
                     new List<KeyValuePair<string, string>>()
                     {
-                        new KeyValuePair<string, string>("test","test")        
+                        new KeyValuePair<string, string>("test","test")
                     }
                 ),
                 new FilePath("~/App_Data").Unwrap()
@@ -78,7 +82,7 @@ namespace Sample
             var paramsRq = new RqWithResponse(
                 new RqIIS(Request),
                 new RsWithHeaders(
-                    new RsParametric((parameters) => 
+                    new RsParametric((parameters) =>
                         new RsJson(
                             new RsIIS(Response),
                             new Users().FindById(parameters["name"])
@@ -95,6 +99,39 @@ namespace Sample
                 )
             );
 
+            var sess = new RqWithResponse(
+                new RqIIS(Request),
+                new RsParametric((parameters) => {
+                    new RqWithSession(
+                        new RqIIS(Request),
+                        new SIIS(Session)
+                    ).Session("id", parameters["id"]);
+                    return new RsJson(
+                        new RsIIS(Response),
+                        new Users().FindById(parameters["id"])
+                    );
+                },
+                    new RqWithParamsInPath(
+                        new RqIIS(Request),
+                        new Regex(@"~/sess/(?<id>\w+)")
+                    ).Parameters()
+                )
+            );
+
+            var sessCheck = new RqWithResponse(
+                new RqIIS(Request),
+                new RsLazy(() => {
+                    var session = new RqWithSession(
+                        new RqIIS(Request),
+                        new SIIS(Session)
+                    );
+                    return new RsJson(
+                        new RsIIS(Response),
+                        new Users().FindById(session.Session("id"))
+                    );
+                })
+            );
+
             new Application(new List<AppRule>() {
                 new RlRegex(
                     textRq, new Regex("^~/$",RegexOptions.Compiled)
@@ -108,9 +145,15 @@ namespace Sample
                 new RlRegex(
                     htmlRq, new Regex("^~/html.*$",RegexOptions.Compiled)
                 ),
+                new RlRegex(
+                    sess, new Regex("^~/sess.*$",RegexOptions.Compiled)
+                ),
+                new RlRegex(
+                    sessCheck, new Regex("^~/sess/check.*$",RegexOptions.Compiled)
+                ),
                 new RlPost(
                     new RlRegex(
-                        jsonRq, 
+                        jsonRq,
                         new Regex("^~/json.*$",RegexOptions.Compiled)
                     )
                 )
